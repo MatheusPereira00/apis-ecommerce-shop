@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import static com.produtos.api.domains.message.ProductMessage.PRODUCT_NOT_FOUND_MESSAGE;
 
-@Service
+@Service("serviceImplProduct")
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
 
         List<Product> products = productRepository.findByNameProduct(nameProduct);
 
-        if(products.size() == 0) {
+        if(products.isEmpty()) {
             throw new EntityNotFoundException(
                     "Não foi possível encontrar um produto com este nome. "
                             + "Verifique e tente novamente.");

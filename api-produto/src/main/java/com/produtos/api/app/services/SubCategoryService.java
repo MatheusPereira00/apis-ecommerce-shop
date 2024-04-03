@@ -9,5 +9,7 @@ public interface SubCategoryService {
 
     public List<SubCategory> findAllSubCategories();
 
-    public ProductsBySubCategory findSubcategoryaWithProducts(Long idSubCategory);
+    public SubCategory findById(Long idSubcategory);
+
+    public ProductsBySubCategory findSubcategoryWithProducts(Long idSubcategory);
 }

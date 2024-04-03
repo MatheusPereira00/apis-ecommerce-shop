@@ -2,10 +2,12 @@ package com.produtos.api.app.controllers;
 
 import com.produtos.api.app.services.SubCategoryService;
 import com.produtos.api.infra.models.SubCategory;
+import com.produtos.api.rest.dto.response.ProductsBySubCategory;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +36,12 @@ public class SubCategoryController {
         return new ResponseEntity<>(subcategorias, HttpStatus.OK);
 
     }
+
+    @GetMapping(path="/{idSubCategory}")
+    public ResponseEntity<ProductsBySubCategory> findBydId(@PathVariable("idSubCategory") Long idSubCategory){
+        ProductsBySubCategory subcategoryProd = subCategoryService.findSubcategoryWithProducts(idSubCategory);
+        return new ResponseEntity<>(subcategoryProd, HttpStatus.OK);
+    }
+
 
 }
