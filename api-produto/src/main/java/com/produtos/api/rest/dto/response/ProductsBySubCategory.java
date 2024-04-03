@@ -17,5 +17,5 @@ public class ProductsBySubCategory {
 
     SubCategory subCategory;
 
-    List<Product> products;
+    List<ProductDTO> products;
 }

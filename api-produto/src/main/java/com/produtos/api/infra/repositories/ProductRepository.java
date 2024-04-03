@@ -12,6 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     public Product findBySku (int sku);
 
-    public List<Product> findBySubcategoria(SubCategory subCategory);
+    public List<Product> findBySubCategory(SubCategory subCategory);
 
 }
