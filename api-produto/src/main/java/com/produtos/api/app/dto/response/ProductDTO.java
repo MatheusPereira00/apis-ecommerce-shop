@@ -1,4 +1,4 @@
-package com.produtos.api.rest.dto.response;
+package com.produtos.api.app.dto.response;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

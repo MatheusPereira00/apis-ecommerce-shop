@@ -1,6 +1,5 @@
-package com.produtos.api.rest.dto.response;
+package com.produtos.api.app.dto.response;
 
-import com.produtos.api.infra.models.Product;
 import com.produtos.api.infra.models.SubCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

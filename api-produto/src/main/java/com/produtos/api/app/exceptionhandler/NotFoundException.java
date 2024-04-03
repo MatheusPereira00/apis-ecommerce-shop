@@ -1,4 +1,4 @@
-package com.produtos.api.rest.exceptionhandler;
+package com.produtos.api.app.exceptionhandler;
 
 public class NotFoundException extends RuntimeException {
 

@@ -1,8 +1,8 @@
-package com.produtos.api.app.controllers;
+package com.produtos.api.app.resourceQuery;
 
-import com.produtos.api.app.services.SubCategoryService;
+import com.produtos.api.domains.usecase.query.SubCategoryService;
 import com.produtos.api.infra.models.SubCategory;
-import com.produtos.api.rest.dto.response.ProductsBySubCategory;
+import com.produtos.api.app.dto.response.ProductsBySubCategory;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

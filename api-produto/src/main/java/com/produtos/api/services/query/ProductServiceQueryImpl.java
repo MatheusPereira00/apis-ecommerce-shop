@@ -1,9 +1,9 @@
-package com.produtos.api.app.services.impl;
+package com.produtos.api.services.query;
 
-import com.produtos.api.app.services.ProductService;
+import com.produtos.api.domains.usecase.query.ProductService;
 import com.produtos.api.infra.models.Product;
 import com.produtos.api.infra.repositories.ProductRepository;
-import com.produtos.api.rest.exceptionhandler.NotFoundException;
+import com.produtos.api.app.exceptionhandler.NotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ import java.util.Optional;
 import static com.produtos.api.domains.message.ProductMessage.PRODUCT_NOT_FOUND_MESSAGE;
 
 @Service("serviceImplProduct")
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceQueryImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceQueryImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

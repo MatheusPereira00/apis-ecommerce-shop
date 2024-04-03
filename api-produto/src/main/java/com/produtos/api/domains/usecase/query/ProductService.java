@@ -1,4 +1,4 @@
-package com.produtos.api.app.services;
+package com.produtos.api.domains.usecase.query;
 
 import com.produtos.api.infra.models.Product;
 

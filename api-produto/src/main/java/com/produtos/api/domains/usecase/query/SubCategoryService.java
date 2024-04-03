@@ -1,7 +1,7 @@
-package com.produtos.api.app.services;
+package com.produtos.api.domains.usecase.query;
 
 import com.produtos.api.infra.models.SubCategory;
-import com.produtos.api.rest.dto.response.ProductsBySubCategory;
+import com.produtos.api.app.dto.response.ProductsBySubCategory;
 
 import java.util.List;
 

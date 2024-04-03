@@ -1,6 +1,6 @@
-package com.produtos.api.app.controllers;
+package com.produtos.api.app.resourceQuery;
 
-import com.produtos.api.app.services.ProductService;
+import com.produtos.api.domains.usecase.query.ProductService;
 import com.produtos.api.infra.models.Product;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
