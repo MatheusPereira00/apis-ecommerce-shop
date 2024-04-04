@@ -1,7 +1,7 @@
-package com.produtos.api.app.resourceQuery;
+package com.produtos.api.app.query;
 
 import com.produtos.api.app.dto.response.ProductsByCategory;
-import com.produtos.api.app.dto.response.ProductsBySubCategory;
+import com.produtos.api.app.exceptionhandler.CategoryNotFoundException;
 import com.produtos.api.domains.usecase.query.CategoryService;
 import com.produtos.api.infra.models.Category;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static com.produtos.api.domains.message.CategoryMessage.CATEGORY_NOT_FOUND_MESSAGE;
 
 @RestController
 @RequestMapping("/product/category")
@@ -29,7 +31,7 @@ public class CategoryController {
         List<Category> categories = categoryService.findAll();
 
         if(categories.isEmpty()){
-            throw new EntityNotFoundException("Ops! Ainda não há sub_categorias cadastradas");
+            throw new CategoryNotFoundException(CATEGORY_NOT_FOUND_MESSAGE);
         }
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }

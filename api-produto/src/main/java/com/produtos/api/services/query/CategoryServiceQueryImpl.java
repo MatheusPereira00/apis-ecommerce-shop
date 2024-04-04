@@ -1,8 +1,9 @@
 package com.produtos.api.services.query;
 
-import com.produtos.api.app.dto.response.ProductDTO;
+import com.produtos.api.app.dto.response.ProductResponse;
 import com.produtos.api.app.dto.response.ProductsByCategory;
-import com.produtos.api.app.exceptionhandler.NotFoundException;
+import com.produtos.api.app.exceptionhandler.CategoryNotFoundException;
+import com.produtos.api.app.exceptionhandler.ProductNotFoundException;
 import com.produtos.api.domains.usecase.query.CategoryService;
 import com.produtos.api.infra.models.Category;
 import com.produtos.api.infra.models.Product;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.produtos.api.domains.message.CategoryMessage.CATEGORY_NOT_FOUND_ID_MESSAGE;
 import static com.produtos.api.domains.message.CategoryMessage.CATEGORY_NOT_FOUND_MESSAGE;
 
 @Service
@@ -36,7 +38,7 @@ public class CategoryServiceQueryImpl implements CategoryService {
     @Override
     public Category findById(Long idCategory) {
         return categoryRepository.findById(idCategory)
-                .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND_MESSAGE));
+                .orElseThrow(() -> new CategoryNotFoundException(CATEGORY_NOT_FOUND_ID_MESSAGE));
     }
 
     @Override
@@ -46,12 +48,12 @@ public class CategoryServiceQueryImpl implements CategoryService {
 
         List<Product> products = productRepository.findAll();
 
-        List<ProductDTO> productsDTO = new ArrayList<>();
+        List<ProductResponse> productsDTO = new ArrayList<>();
 
         if (products != null) {
             products.forEach(product -> {
                 if(category.equals(product.getSubCategory().getCategory()) ) {
-                    productsDTO.add(mapper.map(product, ProductDTO.class));
+                    productsDTO.add(mapper.map(product, ProductResponse.class));
                 }
             });
         }
@@ -63,4 +65,5 @@ public class CategoryServiceQueryImpl implements CategoryService {
 
         return categoryAndProduct;
     }
+
 }

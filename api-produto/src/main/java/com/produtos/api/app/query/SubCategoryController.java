@@ -1,5 +1,6 @@
-package com.produtos.api.app.resourceQuery;
+package com.produtos.api.app.query;
 
+import com.produtos.api.app.exceptionhandler.SubCategoryNotFoundException;
 import com.produtos.api.domains.usecase.query.SubCategoryService;
 import com.produtos.api.infra.models.SubCategory;
 import com.produtos.api.app.dto.response.ProductsBySubCategory;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static com.produtos.api.domains.message.SubCategoryMessage.SUBCATEGORY_NOT_FOUND_MESSAGE;
 
 @RestController
 @RequestMapping("/product/subcategory")
@@ -29,8 +32,7 @@ public class SubCategoryController {
         List<SubCategory> subcategorias = subCategoryService.findAllSubCategories();
 
         if (subcategorias.isEmpty()) {
-            throw new EntityNotFoundException(
-                    "Ops! Ainda não há sub_categorias cadastradas");
+            throw new SubCategoryNotFoundException(SUBCATEGORY_NOT_FOUND_MESSAGE);
         }
 
         return new ResponseEntity<>(subcategorias, HttpStatus.OK);
@@ -42,6 +44,5 @@ public class SubCategoryController {
         ProductsBySubCategory subcategoryProd = subCategoryService.findSubcategoryWithProducts(idSubCategory);
         return new ResponseEntity<>(subcategoryProd, HttpStatus.OK);
     }
-
 
 }

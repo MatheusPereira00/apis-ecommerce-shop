@@ -12,9 +12,4 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductsBySubCategory {
-
-    SubCategory subCategory;
-
-    List<ProductDTO> products;
-}
+public class ProductsBySubCategory { SubCategory subCategory;List<ProductResponse> products;}

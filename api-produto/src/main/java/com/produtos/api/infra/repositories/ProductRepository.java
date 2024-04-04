@@ -4,6 +4,7 @@ import com.produtos.api.infra.models.Category;
 import com.produtos.api.infra.models.Product;
 import com.produtos.api.infra.models.SubCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

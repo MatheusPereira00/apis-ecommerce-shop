@@ -1,20 +1,21 @@
 package com.produtos.api.services.query;
 
+import com.produtos.api.app.exceptionhandler.ProductNotFoundException;
+import com.produtos.api.app.exceptionhandler.SubCategoryNotFoundException;
 import com.produtos.api.domains.usecase.query.SubCategoryService;
 import com.produtos.api.infra.models.Product;
 import com.produtos.api.infra.models.SubCategory;
 import com.produtos.api.infra.repositories.ProductRepository;
 import com.produtos.api.infra.repositories.SubCategoryRepository;
-import com.produtos.api.app.dto.response.ProductDTO;
+import com.produtos.api.app.dto.response.ProductResponse;
 import com.produtos.api.app.dto.response.ProductsBySubCategory;
-import com.produtos.api.app.exceptionhandler.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.produtos.api.domains.message.SubCategoryMessage.SUBCATEGORY_NOT_FOUND_MESSAGE;
+import static com.produtos.api.domains.message.SubCategoryMessage.SUBCATEGORY_NOT_FOUND_ID__MESSAGE;
 
 @Service("serviceImplSubCategory")
 public class SubCategoryServiceQueryImpl implements SubCategoryService {
@@ -36,7 +37,7 @@ public class SubCategoryServiceQueryImpl implements SubCategoryService {
     @Override
     public SubCategory findById(Long idSubcategory) {
         return subCategoryRepository.findById(idSubcategory)
-                .orElseThrow(() -> new NotFoundException(SUBCATEGORY_NOT_FOUND_MESSAGE));
+                .orElseThrow(() -> new SubCategoryNotFoundException(SUBCATEGORY_NOT_FOUND_ID__MESSAGE));
     }
 
     @Override
@@ -46,11 +47,11 @@ public class SubCategoryServiceQueryImpl implements SubCategoryService {
 
         List<Product> products = productRepository.findBySubCategory(subCategory);
 
-        List<ProductDTO> productsDTO = new ArrayList<>();
+        List<ProductResponse> productsDTO = new ArrayList<>();
 
         if (products != null) {
             products.forEach(product -> {
-                ProductDTO produtoDTO = mapper.map(product, ProductDTO.class);
+                ProductResponse produtoDTO = mapper.map(product, ProductResponse.class);
                 productsDTO.add(produtoDTO);
             });
         }

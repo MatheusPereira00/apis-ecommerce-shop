@@ -1,16 +1,15 @@
 package com.produtos.api.services.query;
 
+import com.produtos.api.app.exceptionhandler.ProductNotFoundException;
 import com.produtos.api.domains.usecase.query.ProductService;
 import com.produtos.api.infra.models.Product;
 import com.produtos.api.infra.repositories.ProductRepository;
-import com.produtos.api.app.exceptionhandler.NotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.produtos.api.domains.message.ProductMessage.PRODUCT_NOT_FOUND_MESSAGE;
+import static com.produtos.api.domains.message.ProductMessage.*;
 
 @Service("serviceImplProduct")
 public class ProductServiceQueryImpl implements ProductService {
@@ -22,12 +21,20 @@ public class ProductServiceQueryImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAll() {return productRepository.findAll();}
+    public List<Product> findAll() {
+        List<Product> products =  productRepository.findAll();
+
+        if(products.isEmpty()) {
+            throw new ProductNotFoundException(PRODUCT_NOT_FOUND_MESSAGE);
+        }
+
+        return products;
+    }
 
     @Override
     public Optional<Product> findById(Long idProduct) {
         Product product = productRepository.findById(idProduct)
-                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
+                .orElseThrow(() -> new ProductNotFoundException(PRODUCT_NOT_FOUND_ID_MESSAGE));
         return Optional.ofNullable(product);
     }
 
@@ -37,9 +44,7 @@ public class ProductServiceQueryImpl implements ProductService {
         List<Product> products = productRepository.findByNameProduct(nameProduct);
 
         if(products.isEmpty()) {
-            throw new EntityNotFoundException(
-                    "Não foi possível encontrar um produto com este nome. "
-                            + "Verifique e tente novamente.");
+            throw new ProductNotFoundException(PRODUCT_NOT_FOUND_NAME_MESSAGE);
         }
 
         return products;
