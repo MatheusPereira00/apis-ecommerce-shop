@@ -46,23 +46,13 @@ public class CategoryServiceQueryImpl implements CategoryService {
 
         List<Product> products = productRepository.findAll();
 
-        List<Product> productsCategory = new ArrayList<>();
-
-        if (products != null) {
-            products.forEach(product -> {
-                if(category == product.getSubCategory().getCategory()) {
-                    productsCategory.add(product);
-                }
-            });
-        }
-
-
         List<ProductDTO> productsDTO = new ArrayList<>();
 
         if (products != null) {
             products.forEach(product -> {
-                ProductDTO produtoDTO = mapper.map(product, ProductDTO.class);
-                productsDTO.add(produtoDTO);
+                if(category.equals(product.getSubCategory().getCategory()) ) {
+                    productsDTO.add(mapper.map(product, ProductDTO.class));
+                }
             });
         }
 
