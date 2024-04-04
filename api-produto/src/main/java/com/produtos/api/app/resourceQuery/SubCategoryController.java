@@ -28,7 +28,7 @@ public class SubCategoryController {
 
         List<SubCategory> subcategorias = subCategoryService.findAllSubCategories();
 
-        if (subcategorias.size() == 0) {
+        if (subcategorias.isEmpty()) {
             throw new EntityNotFoundException(
                     "Ops! Ainda não há sub_categorias cadastradas");
         }
