@@ -1,5 +1,6 @@
 package com.produtos.api.app.exceptionhandler.handler;
 
+import com.produtos.api.app.exceptionhandler.ProductCreatedException;
 import com.produtos.api.app.exceptionhandler.ProductNotFoundException;
 import com.produtos.api.app.exceptionhandler.ProductNotFoundParamException;
 import com.produtos.api.app.exceptionhandler.SkuExistingException;
@@ -40,4 +41,14 @@ public class ProductHandler extends ResponseEntityExceptionHandler {
                 .header("ErrorMessage:", "")
                 .body(e.getMessage());
     }
+
+    @ExceptionHandler(ProductCreatedException.class)
+    public ResponseEntity<Object> productCreatedException (ProductCreatedException e){
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .header("ErrorMessage:", "")
+                .body(e.getMessage());
+    }
+
 }

@@ -1,4 +1,7 @@
 package com.produtos.api.app.exceptionhandler;
 
-public class ProductCreated {
+public class ProductCreatedException extends RuntimeException{
+    public ProductCreatedException(String message){
+        super(message);
+    }
 }

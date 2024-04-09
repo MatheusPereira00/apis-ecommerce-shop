@@ -8,9 +8,16 @@ public class ProductMessage {
 
     public static final String PRODUCT_NOT_FOUND_MESSAGE = "Nenhum produto cadastrado :( ";
 
+    public static final String PRODUCT_NOT_FOUND_DELETE_MESSAGE = "Nenhum produto encontrado para deletar :( ";
+
     public static final String PRODUCT_NOT_FOUND_WITH_PARAM_MESSAGE = "Nenhum produto com esse {parametro} foi encontrado :( ";
 
     public static final String PRODUCT_NOT_FOUND_NAME_MESSAGE =  "Não foi possível encontrar nenhum produto com este {nameProduct} :( ";
+
+
+    // MAINTENANCE ==
+
+    public static final String PRODUCT_CREATE_MESSAGE = "Produto cadastrado com sucesso :)";
 
 
 
